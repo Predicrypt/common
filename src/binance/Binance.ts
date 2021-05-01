@@ -96,10 +96,10 @@ import {
   WithdrawHistorySupportingNetworkRequest,
   WithdrawHistorySupportingNetworkResponse,
 } from "./interfaces/UserData/WithdrawHistory";
+import { Enums } from "..";
 
 export class BinanceClient {
   private URL = "https://api.binance.com";
-  private URL_WEBSOCKET = "wss://stream.binance.com:9443";
   private HEADER_APIKEY = "X-MBX-APIKEY";
 
   private apiKey: string;
@@ -411,5 +411,32 @@ export class BinanceClient {
       headers: this.addAuthorizationHeader(),
       params: this.addSignatureParam(params),
     });
+  }
+}
+
+export class BinanceWebsocket {
+  private URL_WEBSOCKET = "wss://stream.binance.com:9443";
+  private ws: WebSocket;
+
+  constructor() {
+    this.ws = new WebSocket(this.URL_WEBSOCKET);
+  }
+
+  connectToKline(symbol: string, interval: Enums.CandlestickIntervals) {
+    const req = {
+      method: "SUBSCRIBE",
+      params: [`${symbol}@kline_${interval}`],
+      id: 1,
+    };
+    this.ws.emit(JSON.stringify(req));
+  }
+
+  disconnectToKline(symbol: string, interval: Enums.CandlestickIntervals) {
+    const req = {
+      method: "UNSUBSCRIBE",
+      params: [`${symbol}@kline_${interval}`],
+      id: 2,
+    };
+    this.ws.emit(JSON.stringify(req));
   }
 }
