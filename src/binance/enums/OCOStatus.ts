@@ -1,0 +1,5 @@
+export enum OCOStatus {
+  RESPONSE = "RESPONSE",
+  EXEC_STARTED = "EXEC_STARTED",
+  ALL_DONE = "ALL_DONE",
+}

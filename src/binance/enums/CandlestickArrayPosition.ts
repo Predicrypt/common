@@ -1,0 +1,13 @@
+export enum CandlestickDataPosition {
+  OPEN_TIME = 0,
+  OPEN_PRICE = 1,
+  HIGH_PRICE = 2,
+  LOW_PRICE = 3,
+  CLOSE_PRICE = 4,
+  VOLUME = 5,
+  QUOTE_ASSET_VOLUME = 6,
+  N_TRADES = 7,
+  TAKER_BASE_ASSET_VOLUME = 8,
+  TAKER_QUOTE_ASSET_VOLUME = 9,
+  IGNORE = 10,
+}
