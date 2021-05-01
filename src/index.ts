@@ -9,7 +9,7 @@ export * from "./middlewares/current-user";
 export * from "./middlewares/err-handler";
 export * from "./middlewares/validate-request";
 export * from "./middlewares/require-auth";
-export * from "./binance/BinanceClient";
+export * from "./binance/Binance";
 export * as Enums from "./binance/enums/index";
 export * as MarketData from "./binance/interfaces/MarketData/index";
 export * as SpotTrade from "./binance/interfaces/SpotTrade/index";
