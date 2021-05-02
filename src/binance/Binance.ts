@@ -514,7 +514,7 @@ export class BinanceWebsocket {
     this.ws = new WebSocket(this.URL_WEBSOCKET);
   }
 
-  connectToKline(symbol: string, interval: Enums.CandlestickIntervals) {
+  subscribeToKline(symbol: string, interval: Enums.CandlestickIntervals) {
     const req = {
       method: "SUBSCRIBE",
       params: [`${symbol}@kline_${interval}`],
@@ -523,12 +523,46 @@ export class BinanceWebsocket {
     this.ws.emit(JSON.stringify(req));
   }
 
-  disconnectToKline(symbol: string, interval: Enums.CandlestickIntervals) {
+  unsubscribeToKline(symbol: string, interval: Enums.CandlestickIntervals) {
     const req = {
       method: "UNSUBSCRIBE",
       params: [`${symbol}@kline_${interval}`],
       id: 2,
     };
+    this.ws.emit(JSON.stringify(req));
+  }
+
+  subscribeToMultipleKlines(
+    paramsArr: [{ symbol: string; interval: Enums.CandlestickIntervals }]
+  ) {
+    let params = [];
+    for (let kline of paramsArr) {
+      params.push(`${kline.symbol}@kline_${kline.interval}`);
+    }
+
+    const req = {
+      method: "SUBSCRIBE",
+      params: params,
+      id: 3,
+    };
+
+    this.ws.emit(JSON.stringify(req));
+  }
+
+  unsubscribeToMultipleKlines(
+    paramsArr: [{ symbol: string; interval: Enums.CandlestickIntervals }]
+  ) {
+    let params = [];
+    for (let kline of paramsArr) {
+      params.push(`${kline.symbol}@kline_${kline.interval}`);
+    }
+
+    const req = {
+      method: "UNSUBSCRIBE",
+      params: params,
+      id: 3,
+    };
+
     this.ws.emit(JSON.stringify(req));
   }
 }
