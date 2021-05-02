@@ -512,6 +512,12 @@ export class BinanceWebsocket {
 
   constructor() {
     this.ws = new WebSocket(this.URL_WEBSOCKET);
+    this.ws.on("open", () => {
+      console.log("Connected to websockets binance");
+      this.ws.on("ping", () => {
+        this.ws.emit("pong");
+      });
+    });
   }
 
   subscribeToKline(symbol: string, interval: Enums.CandlestickIntervals) {
