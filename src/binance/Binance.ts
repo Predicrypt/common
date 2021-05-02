@@ -515,6 +515,9 @@ export class BinanceWebsocket {
     this.ws.on("error", (event) => {
       console.log(event.message);
     });
+    this.ws.on('open', (msg: string) => {
+      console.log(msg)
+    })
     this.ws.on("ping", () => {
       this.ws.emit("pong");
     });
@@ -545,8 +548,6 @@ export class BinanceWebsocket {
     for (let kline of paramsArr) {
       params.push(`${kline.symbol}@kline_${kline.interval}`);
     }
-
-    console.log(params)
 
     const req = {
       method: "SUBSCRIBE",
