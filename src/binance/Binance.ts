@@ -512,14 +512,11 @@ export class BinanceWebsocket {
 
   constructor() {
     this.ws = new WebSocket(this.URL_WEBSOCKET);
-    this.ws.onerror = (event) => {
-      console.log(event)
-    }
-    this.ws.on("open", () => {
-      console.log("Connected to websockets binance");
-      this.ws.on("ping", () => {
-        this.ws.emit("pong");
-      });
+    this.ws.on("error", (event) => {
+      console.log(event.message);
+    });
+    this.ws.on("ping", () => {
+      this.ws.emit("pong");
     });
   }
 
@@ -549,6 +546,8 @@ export class BinanceWebsocket {
       params.push(`${kline.symbol}@kline_${kline.interval}`);
     }
 
+    console.log(params)
+
     const req = {
       method: "SUBSCRIBE",
       params: params,
@@ -576,4 +575,4 @@ export class BinanceWebsocket {
   }
 }
 
-const ws = new BinanceWebsocket()
+const ws = new BinanceWebsocket();
