@@ -1,4 +1,4 @@
-import { FilterTypes, OrderTypes } from "../../enums";
+import { FilterTypes, OrderTypes, SymbolStatus } from "../../enums";
 
 export interface ExchangeInfoResponse {
   timezone: string;
@@ -10,7 +10,7 @@ export interface ExchangeInfoResponse {
 
 export interface ExchageInfoSymbols {
   symbol: string;
-  status: string;
+  status: SymbolStatus;
   baseAsset: string;
   baseAssetPrecision: number;
   quoteAsset: string;
