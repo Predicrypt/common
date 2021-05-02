@@ -1,3 +1,5 @@
+import { FilterTypes, OrderTypes } from "../../enums";
+
 export interface ExchangeInfoResponse {
   timezone: string;
   serverTime: number;
@@ -14,11 +16,11 @@ export interface ExchageInfoSymbols {
   quoteAsset: string;
   quotePrecision: number;
   quoteAssetPrecision: number;
-  orderTypes: string[];
+  orderTypes: OrderTypes[];
   icebergAllowed: boolean;
   ocoAllowed: boolean;
   isSpotTradingAllowed: boolean;
   isMarginTradingAllowed: boolean;
-  filters: [];
+  filters: FilterTypes[];
   permissions: string[];
 }
