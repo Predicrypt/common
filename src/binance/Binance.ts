@@ -533,7 +533,7 @@ export class BinanceWebsocket {
   }
 
   subscribeToMultipleKlines(
-    paramsArr: [{ symbol: string; interval: Enums.CandlestickIntervals }]
+    paramsArr: { symbol: string; interval: Enums.CandlestickIntervals }[]
   ) {
     let params = [];
     for (let kline of paramsArr) {
@@ -550,7 +550,7 @@ export class BinanceWebsocket {
   }
 
   unsubscribeToMultipleKlines(
-    paramsArr: [{ symbol: string; interval: Enums.CandlestickIntervals }]
+    paramsArr: { symbol: string; interval: Enums.CandlestickIntervals }[]
   ) {
     let params = [];
     for (let kline of paramsArr) {
