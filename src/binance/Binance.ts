@@ -97,6 +97,27 @@ import {
   WithdrawHistorySupportingNetworkResponse,
 } from "./interfaces/UserData/WithdrawHistory";
 import { Enums } from "..";
+import {
+  CandlestickDataRequest,
+  ChangeTicker24hChangeRequest,
+  ChangeTicker24hChangeResponse,
+  CheckServerTimeResponse,
+  CompressedTradeListRequest,
+  CompressedTradesListResponse,
+  CurrentAveragePriceRequest,
+  CurrentAveragePriceResponse,
+  ExchangeInfoResponse,
+  OldTradeLookupRequest,
+  OldTradeLookupResponse,
+  OrderBookRequest,
+  OrderBookResponse,
+  RecentTradeListRequest,
+  RecentTradeListResponse,
+  SymbolOrderBookRequest,
+  SymbolOrderBookResponse,
+  SymbolPriceTickerRequest,
+  SymbolPriceTickerResponse,
+} from "./interfaces/MarketData";
 
 export class BinanceClient {
   private URL = "https://api.binance.com";
@@ -151,6 +172,8 @@ export class BinanceClient {
       "X-MBX-APIKEY": this.apiKey,
     };
   }
+
+  // User data functions
 
   allCoinsInformation(params: AllCoinsInformationRequest) {
     const url = `${this.URL}/sapi/v1/capital/config/getall`;
@@ -318,6 +341,8 @@ export class BinanceClient {
     });
   }
 
+  // Spot trade functions
+
   newLimitOrder(params: NewLimitOrderRequest) {
     const url = `${this.URL}/api/v3/order`;
     return axios.post<NewOrderResponseFull>(url, null, {
@@ -412,11 +437,78 @@ export class BinanceClient {
       params: this.addSignatureParam(params),
     });
   }
+
+  // Market Data functions
+
+  testConnectivity() {
+    const url = `${this.URL}/api/v3/ping`;
+    return axios.get<{}>(url);
+  }
+
+  checkServerTIme() {
+    const url = `${this.URL}/api/v3/time`;
+    return axios.get<CheckServerTimeResponse>(url);
+  }
+
+  exchangeInformation() {
+    const url = `${this.URL}/api/v3/exchangeInfo`;
+    return axios.get<ExchangeInfoResponse>(url);
+  }
+
+  getOrderBook(params: OrderBookRequest) {
+    const url = `${this.URL}/api/v3/depth`;
+    return axios.get<OrderBookResponse>(url, { params });
+  }
+
+  recentTradeList(params: RecentTradeListRequest) {
+    const url = `${this.URL}/api/v3/trades`;
+    return axios.get<RecentTradeListResponse>(url, { params });
+  }
+
+  oldTradeLookup(params: OldTradeLookupRequest) {
+    const url = `${this.URL}/api/v3/historicalTrades`;
+    return axios.get<OldTradeLookupResponse>(url, { params });
+  }
+
+  compressedTradeList(params: CompressedTradeListRequest) {
+    const url = `${this.URL}/api/v3/aggTrades`;
+    return axios.get<CompressedTradesListResponse>(url, { params });
+  }
+
+  klineData(params: CandlestickDataRequest) {
+    const url = `${this.URL}/api/v3/klines`;
+    return axios.get<[[]]>(url, { params });
+  }
+
+  currentAveragePrice(params: CurrentAveragePriceRequest) {
+    const url = `${this.URL}/api/v3/avgPric`;
+    return axios.get<CurrentAveragePriceResponse>(url, { params });
+  }
+
+  tickerPriceChangeStatistics24h(params: ChangeTicker24hChangeRequest) {
+    const url = `${this.URL}/api/v3/ticker/24hr`;
+    return axios.get<ChangeTicker24hChangeResponse>(url, { params });
+  }
+
+  symbolPriceTicker(params: SymbolPriceTickerRequest) {
+    const url = `${this.URL}/api/v3/ticker/price`;
+    return axios.get<SymbolPriceTickerResponse | [SymbolPriceTickerResponse]>(
+      url,
+      { params }
+    );
+  }
+
+  symbolOrderBookTicker(params: SymbolOrderBookRequest) {
+    const url = `${this.URL}/api/v3/ticker/bookTicker`;
+    return axios.get<SymbolOrderBookResponse | [SymbolOrderBookResponse]>(url, {
+      params,
+    });
+  }
 }
 
 export class BinanceWebsocket {
   private URL_WEBSOCKET = "wss://stream.binance.com:9443";
-  ws: WebSocket;
+  public ws: WebSocket;
 
   constructor() {
     this.ws = new WebSocket(this.URL_WEBSOCKET);

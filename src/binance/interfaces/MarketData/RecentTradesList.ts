@@ -8,7 +8,7 @@ export interface RecentTradeListResponse {
   isBestMatch: boolean;
 }
 
-export interface RecentTradeListResponse {
+export interface RecentTradeListRequest {
   symbol: string;
   limit?: number;
 }
