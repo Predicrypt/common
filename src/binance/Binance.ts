@@ -507,7 +507,7 @@ export class BinanceClient {
 }
 
 export class BinanceWebsocket {
-  private URL_WEBSOCKET = "wss://stream.binance.com:9443";
+  private URL_WEBSOCKET = "wss://stream.binance.com:9443/ws";
   public ws: WebSocket;
 
   constructor() {
@@ -575,3 +575,5 @@ export class BinanceWebsocket {
     this.ws.emit(JSON.stringify(req));
   }
 }
+
+const ws = new BinanceWebsocket()
