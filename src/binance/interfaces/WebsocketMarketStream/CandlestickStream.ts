@@ -4,7 +4,7 @@ export interface CandlestickStream {
   e: string;
   E: number;
   s: string;
-  k: any;
+  k: CandlestickStreamData;
 }
 
 export interface CandlestickStreamData {
