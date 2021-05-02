@@ -512,6 +512,9 @@ export class BinanceWebsocket {
 
   constructor() {
     this.ws = new WebSocket(this.URL_WEBSOCKET);
+    this.ws.onerror = (event) => {
+      console.log(event)
+    }
     this.ws.on("open", () => {
       console.log("Connected to websockets binance");
       this.ws.on("ping", () => {
