@@ -509,6 +509,7 @@ export class BinanceClient {
 export class BinanceWebsocket {
   private URL_WEBSOCKET = "wss://stream.binance.com:9443/";
   public ws: WebSocket;
+  static id: number = 1;
 
   constructor() {
     this.ws = new WebSocket(`${this.URL_WEBSOCKET}ws`);
@@ -524,18 +525,22 @@ export class BinanceWebsocket {
     const req = {
       method: "SUBSCRIBE",
       params: [`${symbol}@kline_${interval}`],
-      id: 1,
+      id: BinanceWebsocket.id,
     };
+
     this.ws.send(JSON.stringify(req));
+    BinanceWebsocket.id++;
   }
 
   unsubscribeToKline(symbol: string, interval: Enums.CandlestickIntervals) {
     const req = {
       method: "UNSUBSCRIBE",
       params: [`${symbol}@kline_${interval}`],
-      id: 2,
+      id: BinanceWebsocket.id,
     };
+
     this.ws.send(JSON.stringify(req));
+    BinanceWebsocket.id++;
   }
 
   subscribeToMultipleKlines(
@@ -549,10 +554,11 @@ export class BinanceWebsocket {
     const req = {
       method: "SUBSCRIBE",
       params: params,
-      id: 3,
+      id: BinanceWebsocket.id,
     };
 
     this.ws.send(JSON.stringify(req));
+    BinanceWebsocket.id++;
   }
 
   unsubscribeToMultipleKlines(
@@ -566,10 +572,11 @@ export class BinanceWebsocket {
     const req = {
       method: "UNSUBSCRIBE",
       params: params,
-      id: 3,
+      id: BinanceWebsocket.id,
     };
 
     this.ws.send(JSON.stringify(req));
+    BinanceWebsocket.id++;
   }
 }
 
