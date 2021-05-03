@@ -517,8 +517,7 @@ export class BinanceWebsocket {
       console.log(event.message);
     });
     this.ws.on("ping", (msg) => {
-      console.log(msg);
-      this.ws.send("pong");
+      this.ws.pong();
     });
   }
 
