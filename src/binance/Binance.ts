@@ -118,6 +118,8 @@ import {
   SymbolPriceTickerRequest,
   SymbolPriceTickerResponse,
 } from "./interfaces/MarketData";
+import { AccountTradeListRequest, AccountTradeListResponse } from "./interfaces/SpotTrade/AccountTradeList";
+import { AccountInformationRequest, AccountInformationResponse } from "./interfaces/SpotTrade/AccountInformation";
 
 export class BinanceClient {
   private URL = "https://api.binance.com";
@@ -433,6 +435,22 @@ export class BinanceClient {
   allOrders(params: AllOrdersRequest) {
     const url = `${this.URL}/api/v3/allOrders`;
     return axios.get<OrderResponse[]>(url, {
+      headers: this.addAuthorizationHeader(),
+      params: this.addSignatureParam(params),
+    });
+  }
+
+  accountTradeList(params: AccountTradeListRequest) {
+    const url = `${this.URL}/api/v3/myTrades`;
+    return axios.get<AccountTradeListResponse[]>(url, {
+      headers: this.addAuthorizationHeader(),
+      params: this.addSignatureParam(params),
+    });
+  }
+
+  accountInfo(params: AccountInformationRequest) {
+    const url = `${this.URL}/api/v3/account`;
+    return axios.get<AccountInformationResponse>(url, {
       headers: this.addAuthorizationHeader(),
       params: this.addSignatureParam(params),
     });
