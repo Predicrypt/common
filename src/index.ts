@@ -15,3 +15,7 @@ export * as MarketData from "./binance/interfaces/MarketData/index";
 export * as SpotTrade from "./binance/interfaces/SpotTrade/index";
 export * as UserData from "./binance/interfaces/UserData/index";
 export * as WebsocketMarketStream from "./binance/interfaces/WebsocketMarketStream/index";
+export * from "./events/ListenerAbstract";
+export * from "./events/PublisherAbstract";
+export * from "./events/SubjectsEnum";
+export * from "./events/UserRegisteredEventInterface";
