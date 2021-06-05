@@ -1,4 +1,4 @@
-import { SubjectEnum } from "./SubjectEnum";
+import { SubjectEnum } from "./SubjectsEnum";
 
 export interface UserRegisteredEventInterface {
   subject: SubjectEnum.UserRegistered;
