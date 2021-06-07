@@ -495,7 +495,7 @@ export class BinanceClient {
 
   klineData(params: CandlestickDataRequest) {
     const url = `${this.URL}/api/v3/klines`;
-    return axios.get<[[]]>(url, { params });
+    return axios.get<[][]>(url, { params });
   }
 
   currentAveragePrice(params: CurrentAveragePriceRequest) {
