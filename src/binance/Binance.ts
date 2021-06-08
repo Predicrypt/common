@@ -1,7 +1,6 @@
 import axios from "axios";
 import * as cryptojs from "crypto-js";
 import WebSocket from "ws";
-import winston from "winston";
 import { OrderResponseType } from "./enums/OrderResponseType";
 import { OrderSide } from "./enums/OrderSide";
 import { OrderTypes } from "./enums/OrderTypes";
@@ -127,10 +126,8 @@ export class BinanceClient {
 
   private apiKey: string;
   private secretKey: string;
-  private log: winston.Logger;
 
   constructor(apiKey?: string, secretKey?: string) {
-    this.log = winston.createLogger();
     this.apiKey = apiKey || "";
     this.secretKey = secretKey || "";
   }
@@ -142,7 +139,7 @@ export class BinanceClient {
 
   private addSignatureParam(params: any) {
     if (this.apiKey && this.secretKey) {
-      this.log.warn(
+      console.warn(
         "You cant do this request whithout an api key and secret key"
       );
       return;
@@ -161,7 +158,7 @@ export class BinanceClient {
 
   private addAuthorizationHeader(header?: any) {
     if (this.apiKey === null || this.apiKey === undefined) {
-      this.log.warn("You cant do this request whithout an api key");
+      console.warn("You cant do this request whithout an api key");
       return;
     }
     if (header !== undefined) {
