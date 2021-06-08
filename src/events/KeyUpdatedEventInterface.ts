@@ -1,6 +1,6 @@
 import { SubjectEnum } from "./SubjectsEnum";
 
-export interface KeysUpdatedInterface {
+export interface KeysUpdatedEventInterface {
   subject: SubjectEnum.KeysUpdated;
   data: {
     apiKey: string;
