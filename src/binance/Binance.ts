@@ -138,7 +138,7 @@ export class BinanceClient {
   }
 
   private addSignatureParam(params: any) {
-    if (this.apiKey && this.secretKey) {
+    if (!this.apiKey || !this.secretKey) {
       console.warn(
         "You cant do this request whithout an api key and secret key"
       );
