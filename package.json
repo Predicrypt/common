@@ -40,7 +40,6 @@
     "jsonwebtoken": "^8.5.1",
     "node-nats-streaming": "^0.3.2",
     "tslog": "^3.0.3",
-    "winston": "^3.3.3",
     "ws": "^7.4.1"
   }
 }
