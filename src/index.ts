@@ -20,3 +20,5 @@ export * from "./events/ListenerAbstract";
 export * from "./events/PublisherAbstract";
 export * from "./events/SubjectsEnum";
 export * from "./events/UserRegisteredEventInterface";
+export * from "./events/KeysUpdatedEventInterface";
+
