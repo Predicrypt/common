@@ -1,6 +1,6 @@
 {
   "name": "@predicrypt/common",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Common modules for predicrypt app",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
